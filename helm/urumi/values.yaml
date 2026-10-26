@@ -1,0 +1,26 @@
+image:
+  gateway: urumi-gateway:local
+  upstream: urumi-upstream:local
+  wordpress: wordpress:php8.3-apache
+  mariadb: mariadb:11
+webOverride:
+  enabled: false
+storeAssetsVersion: "3"
+storePublicUrl: ""
+host:
+  dashboard: gateway.urumi.local
+  store: store.urumi.local
+storageClass: ""
+storage:
+  database: 5Gi
+  wordpress: 5Gi
+  gateway: 1Gi
+secrets:
+  mariadbPassword: ""
+  mariadbRootPassword: ""
+  wordpressAdminPassword: ""
+  gatewayAdminPassword: ""
+  llmApiKey: ""
+llm:
+  baseUrl: ""
+  model: ""

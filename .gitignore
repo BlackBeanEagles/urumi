@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+my-secrets.yaml
+*-secrets.local.yaml
+values-private*.yaml
+values-secret*.yaml
+work-npm-cache/
+work-helm/
+helm-cli.zip
+web/dist/
+.helm-cache/

@@ -1,0 +1,8 @@
+host:
+  dashboard: gateway.example.com
+  store: store.example.com
+storePublicUrl: https://store.example.com/shop/
+image:
+  gateway: registry.example.com/urumi-gateway:0.1.0
+  upstream: registry.example.com/urumi-upstream:0.1.0
+storageClass: local-path

@@ -1,0 +1,9 @@
+node_modules
+work-npm-cache
+work-helm
+helm-cli.zip
+*.db
+*.db-shm
+*.db-wal
+.git
+.env

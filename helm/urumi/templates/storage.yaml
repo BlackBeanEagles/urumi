@@ -1,0 +1,14 @@
+{{- range $name, $size := dict "gateway-data" .Values.storage.gateway "wordpress-data" .Values.storage.wordpress "mariadb-data" .Values.storage.database }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $name }}
+spec:
+  accessModes: [ReadWriteOnce]
+  {{- if $.Values.storageClass }}
+  storageClassName: {{ $.Values.storageClass }}
+  {{- end }}
+  resources:
+    requests: {storage: {{ $size }}}
+{{- end }}

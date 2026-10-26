@@ -1,0 +1,76 @@
+/* A quiet, high-contrast control plane: depth for the system, clarity for the data. */
+.sidebar{padding:30px 14px 18px;border-right:1px solid #ffffff19}
+.brand{padding:0 13px 36px;gap:13px}
+.brand b{display:grid;place-items:center;width:38px;height:38px;border:1px solid #9d7cf555;border-radius:12px;background:#7c3aed19;font-size:30px}
+.brand span{font-size:16px;line-height:1.1;letter-spacing:.08em}
+.brand small{margin-top:5px;color:#a8b1c7}
+.side-heading{margin-top:12px;margin-bottom:10px;color:#a4afd0}
+.sidebar nav{gap:6px}
+.sidebar nav button{position:relative;min-height:47px;border:1px solid transparent;border-radius:11px;padding:11px 13px;color:#b9c3d7;font-size:12px;letter-spacing:.01em;transition:background .18s,border-color .18s,color .18s}
+.sidebar nav button:hover{background:#ffffff0d;border-color:#ffffff14;color:#fff}
+.sidebar nav button.active{background:linear-gradient(100deg,#7c3aed38,#5833a01c);border-color:#a78bfa40;color:#fff;box-shadow:inset 3px 0 #a78bfa}
+.sidebar nav button span{color:#bca8f8;font-size:18px}
+.side-foot>p{background:#ffffff0a;border-color:#ffffff20;color:#d5e0ee}
+.side-foot>div{padding:16px 10px 2px}
+.top{height:72px;border-color:#dbe2ed;padding:0 clamp(20px,3vw,48px)}
+.top>small{color:#536077;font-size:10px}
+.top input{width:245px;border-color:#dce2ed;border-radius:10px;background:#f7f8fc}
+.top input:focus{background:#fff}
+.top button{height:35px;min-width:35px;border-radius:10px}
+.main main{max-width:1530px;padding:clamp(22px,3vw,44px)}
+.page-head{margin-bottom:31px}
+.page-head h1{font-size:clamp(29px,2.8vw,42px);letter-spacing:-.05em;margin:9px 0 7px}
+.page-head p{line-height:1.55;color:#59677c;font-size:13px}
+.page-head>.primary{padding:12px 18px;box-shadow:0 8px 20px #7c3aed24}
+.stats{gap:16px;margin-bottom:22px}
+.stats>div{position:relative;overflow:hidden;min-height:138px;padding:22px 24px;border-radius:17px;border:1px solid #e2e8f0;box-shadow:0 7px 24px #0f172a09}
+.stats>div:before{content:'';position:absolute;right:-21px;top:-20px;width:100px;height:100px;border-radius:50%;border:1px solid #d8c9ff66;box-shadow:0 0 0 22px #e9deff26,0 0 0 47px #f0e9ff1f}
+.stats>div:first-child{border-top:3px solid #7c3aed}.stats>div:nth-child(2){border-top:3px solid #8b5cf6}.stats>div:nth-child(3){border-top:3px solid #6366f1}.stats>div:nth-child(4){border-top:3px solid #16a34a}
+.stats small{position:relative;color:#5b6680;font-size:10px}
+.stats strong{position:relative;font-size:36px;margin:14px 0 2px;color:#18243c}
+.stats p{position:relative;font-size:11px;color:#748199}
+.card{border-radius:18px;padding:22px;border-color:#e1e6ef;box-shadow:0 8px 28px #0f172a0a}
+.card-head{padding-bottom:14px;border-bottom:1px solid #edf0f5;margin-bottom:17px}
+.card-head h2{font-size:15px;letter-spacing:-.02em}
+.card-head>span{color:#6b7690}
+.overview-grid{gap:22px}
+.topology-body{min-height:343px;background-color:#f9f8ff;background-image:radial-gradient(#d7d1ec 1px,transparent 1px);background-size:19px 19px;border:1px solid #ece8f7;border-radius:14px;padding:24px}
+.topo-node{border-color:#ded9ea;border-radius:15px;box-shadow:0 10px 22px #28234a12;padding:18px 13px}
+.topo-node.center{background:#fff;border:2px solid #a78bfa;box-shadow:0 0 0 7px #c4b5fd30,0 14px 32px #5b21b626}
+.topo-node.center b{color:#6d28d9}
+.wire{background:linear-gradient(90deg,#c4b5fd,#7c3aed);height:2px}
+.topo-servers button{min-height:68px;padding:12px;border-color:#e0e3ee;border-radius:12px;box-shadow:0 4px 12px #27215b0a;transition:transform .16s,border-color .16s,box-shadow .16s}
+.topo-servers button:hover{transform:translateY(-2px);border-color:#a78bfa;box-shadow:0 8px 18px #7c3aed17}
+.topo-servers button.is-unreachable{border-color:#fecaca;background:#fffafa}
+.topo-servers button.is-slow{border-color:#fcdba8;background:#fffdf7}
+.topo-servers .server-meta{margin-top:3px;color:#758095}
+.activity-button{width:100%;background:none;border:0;border-radius:10px;text-align:left;padding:13px 8px;transition:background .15s}
+.activity-button:hover{background:#f8f6ff;border:0}
+.activity-button strong{font-size:12px;color:#253047}
+.trace-open{font-size:10px;color:#6d28d9;font-weight:750;white-space:nowrap}
+.workbench{gap:22px}
+.server-list>button{border-radius:11px;min-height:63px}
+.server-list>button.selected{box-shadow:inset 3px 0 #7c3aed}
+.server-observation{border-radius:12px}
+.tool-row{padding:15px 7px;transition:background .15s}
+.tool-row:hover{background:#f8f6ff}
+.chat-grid{gap:22px;min-height:540px}
+.conversation{scrollbar-color:#c4b5fd transparent}
+.welcome{margin:10% auto}.welcome>b{display:grid;place-items:center;width:64px;height:64px;margin:auto;border-radius:19px;background:#f1eaff;box-shadow:0 8px 22px #7c3aed14}
+.welcome h3{font-size:21px;letter-spacing:-.035em}
+.welcome button{padding:12px 15px;border-color:#e5e1ef;box-shadow:0 3px 10px #33246008}
+.welcome button:hover{background:#f8f5ff}
+.bubble{line-height:1.55;box-shadow:0 3px 10px #34206008}
+.bubble.assistant{border:1px solid #e6ddf9}.bubble.user{border:1px solid #dce2ff}
+.composer{background:#fff;padding:15px 0 0}.composer input{min-height:46px}.composer button{padding-inline:18px}
+.execution details,.execution .member-call{border-radius:12px}
+.execution summary:hover{background:#fbfaff}
+.status.warning{background:#fef3c7;color:#92400e}.status.warning i{background:#d97706}
+.notice{box-shadow:0 6px 20px #7c3aed12}
+.login-form{box-shadow:0 25px 70px #02061759,0 0 0 1px #ffffff66}
+.login-form input{min-height:44px}
+.login-story>div{background:#0a102899;box-shadow:0 8px 22px #0003}
+@media(max-width:1150px){.stats>div{min-height:125px}.topology-body{min-height:285px}}
+@media(max-width:760px){.sidebar{padding:12px 14px 8px}.brand{padding:5px 7px 11px}.sidebar nav{gap:4px;scrollbar-width:none}.sidebar nav button{min-height:42px;padding:9px 11px;font-size:11px}.sidebar nav button span{font-size:15px;width:18px}.top{height:56px}.main main{padding:21px 16px}.page-head{margin-bottom:21px}.stats{gap:9px}.stats>div{padding:17px;min-height:110px}.stats strong{font-size:28px}.topology-body{padding:15px}.chat-grid{gap:15px}.chat-card{min-height:500px}.card{padding:17px}.store-link{padding:7px 9px}.top>small{font-size:9px}}
+@media(max-width:480px){.top>div{gap:6px}.stats>div:before{display:none}.stats small{font-size:9px}.page-head h1{font-size:29px}.topology-body{align-items:center}.topo-node{padding:11px 6px}.topo-node strong{font-size:10px}.topo-node small{font-size:9px}.topo-node.center{min-width:115px}.wire{width:9px}.topo-servers button{min-height:61px}.trace-open{display:none}}
+@media(prefers-reduced-motion:reduce){.topo-servers button,.activity-button,.tool-row{transition:none}.topo-servers button:hover{transform:none}}

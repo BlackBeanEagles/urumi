@@ -1,0 +1,18 @@
+{
+  "name": "urumi-mcp-gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/main.js",
+    "start": "node src/main.js",
+    "test": "node --test",
+    "build:web": "vite build --config web/vite.config.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": { "vite": "^7.1.0" },
+  "engines": { "node": ">=22" }
+}

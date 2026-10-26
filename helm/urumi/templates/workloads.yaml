@@ -1,0 +1,85 @@
+{{- $root := . }}
+{{- range $name, $kind := dict "gateway" "gateway" "woocommerce-mcp" "woocommerce" "catalog-mcp" "catalog" "clock-mcp" "clock" }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: {{ $name }}}
+  template:
+    metadata:
+      labels: {app: {{ $name }}}
+    spec:
+      {{- if eq $name "gateway" }}
+      securityContext:
+        fsGroup: 1000
+      {{- end }}
+      containers:
+        - name: app
+          image: {{ if eq $name "gateway" }}{{ $root.Values.image.gateway }}{{ else }}{{ $root.Values.image.upstream }}{{ end }}
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 3000}]
+          readinessProbe:
+            httpGet: {path: /healthz, port: 3000}
+          livenessProbe:
+            httpGet: {path: /healthz, port: 3000}
+            initialDelaySeconds: 20
+          resources:
+            requests: {cpu: 50m, memory: 64Mi}
+            limits: {cpu: 500m, memory: 512Mi}
+          env:
+            - {name: PORT, value: "3000"}
+            - {name: SERVER_KIND, value: {{ $kind | quote }}}
+            {{- if eq $name "gateway" }}
+            - {name: DB_PATH, value: /data/urumi.db}
+            - name: ADMIN_PASSWORD
+              valueFrom: {secretKeyRef: {name: urumi-secrets, key: gateway-admin-password}}
+            - {name: WOO_MCP_URL, value: "http://woocommerce-mcp.{{ $root.Release.Namespace }}.svc.cluster.local:3000/mcp"}
+            - {name: CATALOG_MCP_URL, value: "http://catalog-mcp.{{ $root.Release.Namespace }}.svc.cluster.local:3000/mcp"}
+            - {name: CLOCK_MCP_URL, value: "http://clock-mcp.{{ $root.Release.Namespace }}.svc.cluster.local:3000/mcp"}
+            - {name: LLM_BASE_URL, value: {{ $root.Values.llm.baseUrl | quote }}}
+            - {name: LLM_MODEL, value: {{ $root.Values.llm.model | quote }}}
+            - {name: STORE_PUBLIC_URL, value: {{ $root.Values.storePublicUrl | quote }}}
+            - name: LLM_API_KEY
+              valueFrom: {secretKeyRef: {name: urumi-secrets, key: llm-api-key}}
+            {{- else if eq $kind "woocommerce" }}
+            - {name: WOO_URL, value: "http://wordpress.{{ $root.Release.Namespace }}.svc.cluster.local"}
+            - name: WOO_CONSUMER_KEY
+              valueFrom: {secretKeyRef: {name: urumi-woo-credentials, key: consumer-key}}
+            - name: WOO_CONSUMER_SECRET
+              valueFrom: {secretKeyRef: {name: urumi-woo-credentials, key: consumer-secret}}
+            {{- end }}
+          {{- if eq $name "gateway" }}
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: gateway-code, mountPath: /app/src/gateway.js, subPath: gateway.js, readOnly: true}
+            - {name: gateway-code, mountPath: /app/src/db.js, subPath: db.js, readOnly: true}
+            - {name: gateway-code, mountPath: /app/src/chat-policy.js, subPath: chat-policy.js, readOnly: true}
+            {{- if $root.Values.webOverride.enabled }}
+            - {name: web-code, mountPath: /app/web/dist, readOnly: true}
+            {{- end }}
+          {{- else }}
+          volumeMounts: [{name: upstream-code, mountPath: /app/src/upstream.js, subPath: upstream.js, readOnly: true}]
+          {{- end }}
+      {{- if eq $name "gateway" }}
+      volumes:
+        - {name: data, persistentVolumeClaim: {claimName: gateway-data}}
+        - {name: gateway-code, configMap: {name: urumi-gateway-code}}
+        {{- if $root.Values.webOverride.enabled }}
+        - {name: web-code, configMap: {name: urumi-web-code}}
+        {{- end }}
+      {{- else }}
+      volumes: [{name: upstream-code, configMap: {name: urumi-upstream-code}}]
+      {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+spec:
+  selector: {app: {{ $name }}}
+  ports: [{port: 3000, targetPort: 3000}]
+{{- end }}

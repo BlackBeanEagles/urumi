@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: mariadb}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: mariadb}}
+  template:
+    metadata: {labels: {app: mariadb}}
+    spec:
+      containers:
+        - name: mariadb
+          image: {{ .Values.image.mariadb }}
+          ports: [{containerPort: 3306}]
+          env:
+            - {name: MARIADB_DATABASE, value: wordpress}
+            - {name: MARIADB_USER, value: wordpress}
+            - name: MARIADB_PASSWORD
+              valueFrom: {secretKeyRef: {name: urumi-secrets, key: mariadb-password}}
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom: {secretKeyRef: {name: urumi-secrets, key: mariadb-root-password}}
+          volumeMounts: [{name: data, mountPath: /var/lib/mysql}]
+          readinessProbe: {tcpSocket: {port: 3306}, initialDelaySeconds: 15}
+          livenessProbe: {tcpSocket: {port: 3306}, initialDelaySeconds: 40}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: 1, memory: 1Gi}
+      volumes: [{name: data, persistentVolumeClaim: {claimName: mariadb-data}}]
+---
+apiVersion: v1
+kind: Service
+metadata: {name: mariadb}
+spec:
+  selector: {app: mariadb}
+  ports: [{port: 3306}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: wordpress}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: wordpress}}
+  template:
+    metadata:
+      labels: {app: wordpress}
+      annotations:
+        checksum/storefront: {{ printf "%s%s%s%s%s%s%s" (.Files.Get "files/urumi-storefront.php") (.Files.Get "files/urumi-storefront.css") (.Files.Get "files/urumi-storefront-v2.css") (.Files.Get "files/urumi-storefront-retail.php") (.Files.Get "files/urumi-storefront-retail.css") (.Files.Get "files/urumi-storefront-retail.js") (.Values.storeAssetsVersion | toString) | sha256sum | quote }}
+    spec:
+      initContainers:
+        - name: configure-permalinks
+          image: {{ .Values.image.wordpress }}
+          command: ["sh", "-c", "cp /rewrite/wordpress-htaccess /var/www/html/.htaccess && mkdir -p /var/www/html/wp-content/mu-plugins/urumi-assets && cp /storefront/urumi-storefront.php /storefront/urumi-storefront.css /storefront/urumi-storefront-v2.css /storefront/urumi-storefront-retail.php /storefront/urumi-storefront-retail.css /storefront/urumi-storefront-retail.js /var/www/html/wp-content/mu-plugins/ && cp /store-assets/*.webp /var/www/html/wp-content/mu-plugins/urumi-assets/ && chown -R www-data:www-data /var/www/html/.htaccess /var/www/html/wp-content/mu-plugins/urumi-storefront.php /var/www/html/wp-content/mu-plugins/urumi-storefront.css /var/www/html/wp-content/mu-plugins/urumi-storefront-v2.css /var/www/html/wp-content/mu-plugins/urumi-storefront-retail.php /var/www/html/wp-content/mu-plugins/urumi-storefront-retail.css /var/www/html/wp-content/mu-plugins/urumi-storefront-retail.js /var/www/html/wp-content/mu-plugins/urumi-assets"]
+          volumeMounts:
+            - {name: data, mountPath: /var/www/html}
+            - {name: rewrite, mountPath: /rewrite, readOnly: true}
+            - {name: storefront, mountPath: /storefront, readOnly: true}
+            - {name: store-assets, mountPath: /store-assets, readOnly: true}
+      containers:
+        - name: wordpress
+          image: {{ .Values.image.wordpress }}
+          ports: [{containerPort: 80}]
+          env:
+            - {name: WORDPRESS_DB_HOST, value: mariadb}
+            - {name: WORDPRESS_DB_NAME, value: wordpress}
+            - {name: WORDPRESS_DB_USER, value: wordpress}
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom: {secretKeyRef: {name: urumi-secrets, key: mariadb-password}}
+          volumeMounts: [{name: data, mountPath: /var/www/html}]
+          readinessProbe: {tcpSocket: {port: 80}, initialDelaySeconds: 30, periodSeconds: 10, timeoutSeconds: 5}
+          livenessProbe: {tcpSocket: {port: 80}, initialDelaySeconds: 90, periodSeconds: 20, timeoutSeconds: 5}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: 1, memory: 1Gi}
+      volumes:
+        - {name: data, persistentVolumeClaim: {claimName: wordpress-data}}
+        - {name: rewrite, configMap: {name: wordpress-rewrite}}
+        - {name: storefront, configMap: {name: urumi-storefront}}
+        - {name: store-assets, configMap: {name: urumi-storefront-assets}}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: wordpress}
+spec:
+  selector: {app: wordpress}
+  ports: [{port: 80}]

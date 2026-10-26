@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: urumi-storefront
+data:
+  urumi-storefront.php: |
+{{ .Files.Get "files/urumi-storefront.php" | indent 4 }}
+  urumi-storefront.css: |
+{{ .Files.Get "files/urumi-storefront.css" | indent 4 }}
+  urumi-storefront-v2.css: |
+{{ .Files.Get "files/urumi-storefront-v2.css" | indent 4 }}
+  urumi-storefront-retail.php: |
+{{ .Files.Get "files/urumi-storefront-retail.php" | indent 4 }}
+  urumi-storefront-retail.css: |
+{{ .Files.Get "files/urumi-storefront-retail.css" | indent 4 }}
+  urumi-storefront-retail.js: |
+{{ .Files.Get "files/urumi-storefront-retail.js" | indent 4 }}

@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: mcp-gateway-only}
+spec:
+  podSelector:
+    matchExpressions:
+      - {key: app, operator: In, values: [woocommerce-mcp, catalog-mcp, clock-mcp]}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {app: gateway}
+      ports:
+        - {protocol: TCP, port: 3000}

@@ -1,0 +1,10 @@
+host:
+  dashboard: gateway.localhost
+  store: store.localhost
+ingressClassName: traefik
+storePublicUrl: http://store.localhost/shop/
+webOverride:
+  enabled: true
+image:
+  gateway: urumi-gateway:local
+  upstream: urumi-upstream:local

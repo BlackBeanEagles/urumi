@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: urumi-gateway-code
+data:
+  gateway.js: |-
+{{ .Files.Get "files/gateway.js" | indent 4 }}
+  db.js: |-
+{{ .Files.Get "files/db.js" | indent 4 }}
+  chat-policy.js: |-
+{{ .Files.Get "files/chat-policy.js" | indent 4 }}

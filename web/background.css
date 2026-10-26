@@ -1,0 +1,12 @@
+/* The image spans the viewport; translucent surfaces preserve operational readability. */
+html{min-height:100%;background:#0a1027}
+body{min-height:100vh;background:#0a1027 url('/gateway-background.jpg') center center/cover fixed no-repeat}
+.layout,.login{background:transparent}
+.sidebar{background:rgba(9,15,32,.91);backdrop-filter:blur(12px)}
+.main{min-height:100vh;background:linear-gradient(125deg,rgba(248,250,252,.90),rgba(248,250,252,.96));backdrop-filter:blur(3px)}
+.top{background:rgba(255,255,255,.88);backdrop-filter:blur(12px)}
+.card,.stats>div{background:rgba(255,255,255,.97);box-shadow:0 10px 28px rgba(11,19,47,.08)}
+.login-story{background:linear-gradient(90deg,rgba(5,10,27,.74),rgba(5,10,27,.25))}
+.login-form{width:min(86%,450px);max-width:450px;padding:38px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.8);border-radius:22px;box-shadow:0 25px 70px rgba(2,6,23,.35);backdrop-filter:blur(16px)}
+@media(max-width:760px){.login-story{background:linear-gradient(180deg,rgba(5,10,27,.75),rgba(5,10,27,.38))}.login-form{margin:32px auto 50px;padding:28px;width:min(90%,450px)}.main{background:rgba(248,250,252,.87)}}
+@media(prefers-reduced-transparency:reduce){.sidebar{background:#111827}.main{background:#f8fafc}.top,.card,.stats>div,.login-form{background:#fff}.login-story{background:#111827}}

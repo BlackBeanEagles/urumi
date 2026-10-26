@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordpress-rewrite
+data:
+  wordpress-htaccess: |
+{{ .Files.Get "files/wordpress-htaccess" | indent 4 }}

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: urumi-upstream-code
+data:
+  upstream.js: |
+{{ .Files.Get "files/upstream.js" | indent 4 }}

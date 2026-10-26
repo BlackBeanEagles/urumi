@@ -1,0 +1,12 @@
+{{- if .Values.webOverride.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: urumi-web-code
+data:
+{{ (.Files.Glob "files/web/*.html").AsConfig | indent 2 }}
+{{ (.Files.Glob "files/web/*.js").AsConfig | indent 2 }}
+{{ (.Files.Glob "files/web/*.css").AsConfig | indent 2 }}
+binaryData:
+  gateway-background.jpg: {{ .Files.Get "files/web/gateway-background.jpg" | b64enc }}
+{{- end }}

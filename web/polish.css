@@ -1,0 +1,39 @@
+/* Operational clarity: keep dense information legible and interactive states obvious. */
+button,a,input,textarea,select{transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #a78bfa;outline-offset:2px}
+button:not(:disabled):hover{transform:translateY(-1px)}
+.card{box-shadow:0 4px 24px #0f172a08}
+.topo-servers button:hover,.server-list>button:hover,.tool-row:hover{background:#f5f3ff}
+.stage-row{border-left:3px solid #c4b5fd;padding-left:13px;background:#faf9ff;margin-bottom:4px;border-radius:6px}
+.execution details[open]{border-color:#c4b5fd;box-shadow:0 4px 20px #7c3aed12}
+.execution pre,.drawer pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:300px;overflow:auto}
+.approval-card{box-shadow:0 5px 22px #d977061c}
+.status i{border-radius:50%}
+.status.good i{background:#16a34a}
+.store-link{display:inline-flex;align-items:center;gap:5px;color:#5b21b6;text-decoration:none;font-size:12px;font-weight:750;padding:8px 10px;border:1px solid #ddd6fe;border-radius:9px;background:#f5f3ff;white-space:nowrap}
+.store-link:hover{background:#ede9fe;border-color:#a78bfa}
+.session-note{font-size:12px;line-height:1.5;color:#64748b;margin-top:18px}
+.chat-health{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.chat-health>small{font-size:11px}
+.stage-row.failed{background:#fef2f2;border-left-color:#dc2626;color:#991b1b}
+.stage-row.failed .step,.execution .failed-call .step{background:#fee2e2;color:#b91c1c}
+.stage-detail{display:block;color:#991b1b;font-size:11px;margin-top:4px;overflow-wrap:anywhere;text-transform:none}
+.execution .failed-call{border-color:#fecaca;background:#fffafa}
+.execution .failed-call[open]{border-color:#fca5a5;box-shadow:0 4px 20px #dc262612}
+.tool-error-line{color:#b91c1c!important;font-weight:650;white-space:normal!important;overflow-wrap:anywhere;margin-top:5px}
+.member-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.member-start{display:grid;gap:16px;align-content:start;padding:12px 3px}
+.member-start p{color:#475569;line-height:1.6;margin:0}
+.member-start button,.member-start a{justify-self:start}
+.member-start a{font-size:12px;font-weight:700;color:#6d28d9;text-decoration:none}
+.member-call{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #e2e8f0;border-radius:11px;margin-bottom:10px}
+.member-call>div{flex:1;min-width:0}
+.member-call strong,.member-call small{display:block;overflow:hidden;text-overflow:ellipsis}
+.member-call strong{font-size:11px}.member-call small{font-size:10px}
+.member-call.failed-call{border-color:#fecaca;background:#fffafa}
+.internal-details{margin:4px 0 18px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc}
+.internal-details>summary{padding:12px 14px;color:#64748b;font-size:11px;font-weight:700;cursor:pointer}
+.internal-details .endpoint{margin:0 12px 12px;background:#fff}
+@media(max-width:480px){.member-stats{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.top input{display:none}.chat-health{align-items:flex-start}.store-link{font-size:11px}}
+@media(prefers-reduced-motion:reduce){button,a,input,textarea,select{transition:none!important}button:not(:disabled):hover{transform:none}}

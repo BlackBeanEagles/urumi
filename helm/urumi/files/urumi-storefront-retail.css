@@ -1,0 +1,577 @@
+/* Retail layer: original Urumi identity, real WooCommerce products and checkout. */
+:root{--urumi-ink:#12182b;--urumi-muted:#626b80;--urumi-violet:#6f43d6;--urumi-line:#e7e1e8;--urumi-canvas:#faf5ee}
+html{scroll-behavior:smooth}
+body,body:not(.home){background:var(--urumi-canvas);color:var(--urumi-ink)}
+.wp-site-blocks{background:transparent}
+.urumi-retail-announcement{min-height:34px;display:flex;justify-content:center;align-items:center;gap:16px;padding:5px 15px;background:#eee9fb;color:#332855;font-size:11px;font-weight:650;letter-spacing:.045em;text-align:center}
+.urumi-retail-announcement a{color:#5d35b5;text-decoration:none;border-bottom:1px solid #9977db}
+.urumi-site-header{position:sticky;top:0;background:rgba(255,253,250,.97);border-bottom:1px solid var(--urumi-line);box-shadow:0 4px 22px #1117270d;backdrop-filter:blur(20px)}
+.urumi-header-inner{box-sizing:border-box;width:min(1510px,100%);max-width:none;min-height:82px;padding:0 clamp(20px,4vw,62px);display:grid;grid-template-columns:auto minmax(200px,500px) auto;gap:clamp(20px,4vw,65px);align-items:center}
+.urumi-wordmark{color:#151a30!important;display:inline-flex;gap:10px;align-items:center;font-weight:850;letter-spacing:.09em;text-decoration:none!important;font-size:20px}
+.urumi-wordmark-symbol{display:grid;place-items:center;width:39px;height:39px;margin:0;border-radius:12px;border:0;background:#6d3bdf;color:#fff;font-size:28px}
+.urumi-brand-words{display:flex;flex-direction:column;line-height:1.05}
+.urumi-brand-words small{margin-top:6px;color:#71658b;font-size:8px;letter-spacing:.17em;font-weight:800}
+.urumi-product-search{display:flex;align-items:center;min-width:0;height:46px;border:1px solid #dcdae6;border-radius:7px;background:#f7f7fa;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.urumi-product-search:focus-within{border-color:#8964df;box-shadow:0 0 0 3px #daccfb}
+.urumi-product-search input[type=search]{width:100%;min-width:0;height:100%;padding:0 16px;border:0;outline:0;background:transparent;color:#1a2034;font-size:13px}
+.urumi-product-search input::placeholder{color:#778094}
+.urumi-product-search button{align-self:stretch;min-width:83px;border:0;background:#141b35;color:#fff;font-size:12px;font-weight:750;cursor:pointer}
+.urumi-product-search button:hover{background:#6d3bdf}
+.urumi-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:24px!important}
+.urumi-header-actions a{color:#172039!important;font-size:13px!important;font-weight:700;text-decoration:none}
+.urumi-header-actions a:hover{color:#6d3bdf!important}
+.urumi-cart-link{border:1px solid #dedbe9;background:#fff;color:#1a2037!important;padding:9px 13px;border-radius:7px}
+.urumi-cart-link span{background:#6d3bdf;color:#fff;width:22px;height:22px}
+.urumi-category-nav{border-top:1px solid #eee9ee;background:#fffdfa}
+.urumi-category-nav>div{box-sizing:border-box;width:min(1510px,100%);margin:auto;padding:0 clamp(20px,4vw,62px);display:flex;align-items:center;gap:clamp(24px,3vw,44px);overflow-x:auto;scrollbar-width:none}
+.urumi-category-nav>div::-webkit-scrollbar{display:none}
+.urumi-category-nav a{white-space:nowrap;display:inline-flex;align-items:center;min-height:43px;color:#414a61;text-decoration:none;font-size:12px;font-weight:700;border-bottom:2px solid transparent}
+.urumi-category-nav a:hover,.urumi-category-nav a:focus-visible{color:#6d3bdf;border-color:#6d3bdf}
+.urumi-category-nav a[aria-current=page]{color:#5b2dbd;border-color:#6d3bdf}
+.urumi-storefront{width:min(1510px,calc(100vw - 52px))}
+body.home .urumi-hero{margin-top:24px}
+.urumi-hero{min-height:610px;border:0;border-radius:12px;padding:clamp(42px,6vw,95px);grid-template-columns:1fr;background:linear-gradient(90deg,rgba(10,15,34,.97) 0%,rgba(12,17,38,.90) 33%,rgba(17,19,42,.45) 59%,rgba(17,19,42,.06) 100%),url('/wp-content/mu-plugins/urumi-assets/store-hero.webp') 56% center/cover no-repeat;box-shadow:none}
+.urumi-hero:before{display:none}
+.urumi-hero-copy{max-width:570px}
+.urumi-hero .urumi-eyebrow{color:#d6c5ff;letter-spacing:.2em}
+.urumi-hero h1{font-size:clamp(56px,6.6vw,105px);color:#fff;letter-spacing:-.075em;line-height:.98;margin:25px 0}
+.urumi-hero h1 em{color:#cbb4ff}
+.urumi-hero-copy>p{max-width:460px;color:#e8e5f1;line-height:1.65;font-size:17px}
+.urumi-hero-index{color:#e0d6f6;letter-spacing:.18em}
+.urumi-button{min-width:210px;background:#7b4fe8;border-radius:5px;padding:15px 19px;box-shadow:none;justify-content:space-between}
+.urumi-button:hover{background:#6638c7}
+.urumi-hero .urumi-text-link{color:#fff!important;border-color:#ded2f7}
+.urumi-proof-strip{padding:16px 0 0;gap:12px}
+.urumi-proof-strip span{min-height:56px;justify-content:center;background:#fff;border:1px solid #e8e6ee;border-radius:7px;box-shadow:none;color:#485268;font-weight:700}
+.urumi-proof-strip b{font-size:11px;color:#7145d9}
+.urumi-category-section{padding:86px 0 24px}
+.urumi-section-heading{align-items:end;margin-bottom:30px}
+.urumi-section-heading h2{font-size:clamp(37px,4.2vw,66px);color:#172038;line-height:1.05;letter-spacing:-.065em;margin:10px 0}
+.urumi-section-heading p{color:#626b7e}
+.urumi-eyebrow,.urumi-featured .urumi-eyebrow{color:#7648d9}
+.urumi-text-link{color:#4d2ca6!important;border-color:#b5a3e5}
+.urumi-category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.urumi-category-card{position:relative;display:block;min-width:0;aspect-ratio:1/.74;overflow:hidden;border-radius:9px;background:#d8d6e6;color:#fff;text-decoration:none!important}
+.urumi-category-card:after{content:'';position:absolute;inset:25% 0 0;background:linear-gradient(transparent,rgba(8,12,28,.73));pointer-events:none}
+.urumi-category-card img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.urumi-category-card:hover img{transform:scale(1.055)}
+.urumi-category-card-copy{position:absolute;z-index:1;right:22px;bottom:20px;left:23px;color:#fff;display:grid;grid-template-columns:1fr auto;gap:3px}
+.urumi-category-card-copy small{grid-column:1/-1;color:#f4edf9;font-size:11px;font-weight:650}
+.urumi-category-card-copy strong{font-size:clamp(20px,2vw,29px);line-height:1.1;letter-spacing:-.045em}
+.urumi-category-card-copy>span{align-self:center;font-size:25px}
+.urumi-featured{padding:75px 0 100px;scroll-margin-top:170px}
+.urumi-product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 18px}
+.urumi-product-card{display:flex;flex-direction:column;min-width:0;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none!important;transition:none}
+.urumi-product-card:hover{transform:none}
+.urumi-product-image{aspect-ratio:1/.83;border-radius:8px;background:#e9e6ef!important}
+.urumi-product-image img{object-fit:cover}
+.urumi-product-arrow{right:12px;bottom:12px;width:35px;height:35px;background:#fff;color:#5c30c2}
+.urumi-product-info{padding:17px 2px 8px;gap:8px}
+.urumi-product-kicker{font-size:10px;color:#7b668f;letter-spacing:.14em}
+.urumi-product-info h3{font-size:18px;line-height:1.25;margin:5px 0;color:#172038}
+.urumi-product-info h3 a:hover{color:#6d3bdf}
+.urumi-product-price{font-size:16px;color:#172038}
+.urumi-card-add{margin-top:auto;display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:8px 13px;border:1px solid #d9d5e7;border-radius:5px;color:#4f3298!important;text-decoration:none!important;background:#fff;font-size:12px;font-weight:800;transition:background .2s,color .2s}
+.urumi-card-add:hover{background:#6d3bdf;color:#fff!important;border-color:#6d3bdf}
+.urumi-card-add span{font-size:20px;line-height:1}
+.urumi-endnote{margin:0 0 85px;padding:50px clamp(30px,5vw,75px);border-radius:11px;background:linear-gradient(105deg,#161d3d,#40267b);box-shadow:none}
+.urumi-endnote>div>span{font-size:10px;color:#cbb6fd;font-weight:800;letter-spacing:.16em}
+.urumi-endnote p{margin-top:13px;max-width:630px;font-family:inherit;font-size:clamp(26px,2.8vw,43px);line-height:1.15;letter-spacing:-.04em;font-weight:720}
+.urumi-button.light{background:#fff;color:#3b2380!important;border-radius:5px;min-width:180px}
+.urumi-site-footer{display:block;background:#f1ece6;color:#172038;padding:0 clamp(24px,5vw,80px);border-top:1px solid #e8e0d8}
+.urumi-footer-cta{width:min(1390px,100%);margin:auto;padding:55px 0;display:flex;align-items:end;justify-content:space-between;gap:35px;border-bottom:1px solid #ded6d0}
+.urumi-footer-eyebrow{display:block;color:#6d3bdf;font-size:10px;font-weight:800;letter-spacing:.18em}
+.urumi-footer-cta h2{max-width:690px;margin:14px 0 12px;color:#172038;font-size:clamp(29px,3.3vw,49px);line-height:1.08;letter-spacing:-.055em}
+.urumi-footer-cta p{margin:0;color:#5f6170;font-size:14px;line-height:1.6}
+.urumi-footer-shop-link{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;min-width:200px;padding:14px 17px;border-radius:6px;background:#6d3bdf;color:#fff!important;text-decoration:none!important;font-size:13px;font-weight:750;white-space:nowrap;transition:background .2s}
+.urumi-footer-shop-link:hover{background:#4c249e}
+.urumi-footer-shop-link span{font-size:21px;line-height:1}
+.urumi-footer-inner{width:min(1390px,100%);margin:auto;display:grid;grid-template-columns:1.7fr 1fr .9fr 1.3fr;gap:clamp(25px,5vw,90px);padding:62px 0 64px}
+.urumi-footer-inner .urumi-wordmark{color:#172038!important}
+.urumi-footer-inner .urumi-brand-words small{color:#715e8a}
+.urumi-footer-brand p,.urumi-footer-about p{max-width:300px;line-height:1.7;color:#606678;font-size:13px}
+.urumi-footer-brand-line{display:inline-block;margin-top:20px;color:#6d3bdf;font-size:10px;font-weight:800;letter-spacing:.16em}
+.urumi-footer-inner h2{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5f428d;margin:4px 0 23px;font-weight:800}
+.urumi-site-footer nav{display:flex;flex-direction:column;gap:14px}
+.urumi-site-footer nav a{color:#252d44;font-size:13px;font-weight:650;text-decoration:none}
+.urumi-site-footer nav a:hover{color:#6d3bdf;text-decoration:underline}
+.urumi-footer-bottom{width:min(1390px,100%);margin:auto;border-top:1px solid #ded6d0;min-height:62px;display:flex;justify-content:space-between;gap:20px;align-items:center;color:#667083;font-size:11px}
+body:not(.home) main.wp-block-group{width:min(1450px,calc(100vw - 52px));max-width:1450px;margin:28px auto 74px;padding:clamp(25px,3vw,50px);border:1px solid #eee6e2;border-radius:9px;background:#fffdf9;box-shadow:0 15px 40px #59452b0a}
+body:not(.home) main h1,body:not(.home) main .wp-block-query-title{font-size:clamp(40px,4vw,60px);color:#172038}
+.wp-block-woocommerce-product-collection ul.wc-block-product-template{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.wc-block-product-template li.wc-block-product{border:1px solid #e7e5ee;border-radius:9px;padding:11px;box-shadow:none}
+.wc-block-product-template li.wc-block-product .wc-block-components-product-image img{aspect-ratio:1/.83;object-fit:cover}
+.wc-block-product-template li.wc-block-product .wp-block-button__link,.wc-block-components-button:not(.is-link){border-radius:5px!important;background:#6d3bdf!important;color:#fff!important}
+.woocommerce-cart .wc-block-cart,.woocommerce-checkout .wc-block-checkout{box-shadow:none;border-radius:8px}
+.wc-block-cart__empty-cart__title:before{content:'◇';color:#784bda}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #ac8cf2;outline-offset:3px}
+@media(max-width:1000px){.urumi-header-inner{grid-template-columns:auto minmax(170px,1fr) auto;gap:22px}.urumi-footer-inner{grid-template-columns:1.5fr 1fr 1fr}.urumi-footer-note{grid-column:1/-1}.urumi-category-grid,.urumi-product-grid,.wp-block-woocommerce-product-collection ul.wc-block-product-template{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.urumi-retail-announcement{font-size:10px}.urumi-header-inner{min-height:108px;padding:12px 16px;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:10px}.urumi-wordmark{font-size:17px}.urumi-wordmark-symbol{width:33px;height:33px;font-size:23px}.urumi-brand-words small{font-size:7px}.urumi-header-actions{gap:12px!important}.urumi-header-actions a{font-size:12px!important}.urumi-header-actions>a:first-child{display:none}.urumi-product-search{grid-column:1/-1;grid-row:2;height:41px}.urumi-category-nav>div{gap:23px;padding:0 16px}.urumi-category-nav a{min-height:39px}.urumi-storefront{width:calc(100vw - 24px)}body.home .urumi-hero{margin-top:12px}.urumi-hero{min-height:610px;border-radius:8px;padding:42px 27px 215px;background:linear-gradient(180deg,rgba(9,14,34,.98),rgba(14,17,37,.85) 55%,rgba(15,18,37,.17)),url('/wp-content/mu-plugins/urumi-assets/store-hero.webp') 72% center/cover}.urumi-hero h1{font-size:clamp(47px,11vw,70px)}.urumi-hero-copy>p{font-size:14px}.urumi-hero-actions{gap:18px}.urumi-proof-strip{grid-template-columns:1fr;gap:7px}.urumi-proof-strip span{min-height:44px;justify-content:start}.urumi-category-section{padding:60px 0 15px}.urumi-category-grid{grid-template-columns:1fr;gap:12px}.urumi-category-card{aspect-ratio:1/.57}.urumi-featured{padding:58px 0 65px}.urumi-section-heading{align-items:start;flex-direction:column;gap:10px}.urumi-product-grid,.wp-block-woocommerce-product-collection ul.wc-block-product-template{grid-template-columns:1fr;gap:23px}.urumi-product-image{aspect-ratio:1/.78}.urumi-endnote{padding:35px 25px;margin-bottom:30px}.urumi-footer-inner{grid-template-columns:repeat(2,1fr);padding:50px 0;gap:28px}.urumi-footer-brand,.urumi-footer-note{grid-column:1/-1}.urumi-footer-bottom{flex-direction:column;align-items:start;justify-content:center;padding:16px 0}.urumi-site-footer{padding:0 24px}body:not(.home) main.wp-block-group{width:calc(100vw - 24px);margin:12px auto 28px;padding:22px 15px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.urumi-category-card img,.urumi-card-add{transition:none}}
+@media(max-width:1000px){.urumi-footer-about{grid-column:1/-1}}
+@media(max-width:700px){.urumi-footer-cta{padding:40px 0;flex-direction:column;align-items:stretch;gap:24px}.urumi-footer-cta h2{font-size:34px}.urumi-footer-shop-link{align-self:flex-start}.urumi-footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));padding:46px 0;gap:38px 22px}.urumi-footer-brand,.urumi-footer-about{grid-column:1/-1}}
+
+/* An editorial pause between category discovery and the product catalogue. */
+.urumi-story-section{padding:62px 0 8px}
+.urumi-story-section .urumi-section-heading{margin-bottom:27px}
+.urumi-story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.urumi-story-card{display:grid;grid-template-columns:54% 46%;min-height:360px;overflow:hidden;border-radius:10px;background:#e6e3db}
+.urumi-story-carry{background:#e9e2f0}
+.urumi-story-image{display:block;min-width:0;overflow:hidden}
+.urumi-story-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.urumi-story-card:hover img{transform:scale(1.035)}
+.urumi-story-copy{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:clamp(23px,3vw,42px);min-width:0}
+.urumi-story-copy>span{color:#715486;font-size:10px;font-weight:800;letter-spacing:.16em}
+.urumi-story-copy h3{margin:17px 0 13px;color:#172038;font-size:clamp(27px,2.8vw,43px);line-height:1.08;letter-spacing:-.055em}
+.urumi-story-copy p{margin:0 0 25px;color:#4d5565;font-size:13px;line-height:1.5}
+.urumi-story-copy p .amount{white-space:nowrap;font-weight:750;color:#252d43}
+.urumi-story-copy a{color:#4b2a9b!important;text-decoration:none;border-bottom:1px solid #a28bcf;padding-bottom:5px;font-weight:800;font-size:12px}
+.urumi-story-copy a span{margin-left:13px}
+.urumi-story-copy a:hover{color:#2d176d!important;border-color:#2d176d}
+.urumi-story-section+.urumi-featured{padding-top:75px}
+
+/* A product detail should feel as deliberate as the collection page. */
+body.single-product main .wp-block-columns.alignwide{gap:clamp(34px,4vw,76px);align-items:start}
+body.single-product .wp-block-woocommerce-product-image-gallery{overflow:hidden;border-radius:11px;background:#edeae3}
+body.single-product .woocommerce-product-gallery__wrapper img{display:block;width:100%;height:auto}
+body.single-product main .wp-block-column>.wp-block-post-title{font-size:clamp(39px,4.1vw,63px);line-height:1.05;letter-spacing:-.06em;margin:2px 0 18px}
+body.single-product .wp-block-woocommerce-product-price .amount{font-size:clamp(24px,2.4vw,34px);font-weight:750;color:#39256e}
+body.single-product .wp-block-post-excerpt{padding:8px 0 14px;color:#4f586a;font-size:17px;line-height:1.65}
+body.single-product .wc-block-add-to-cart-form form.cart{display:flex;align-items:stretch;gap:12px;margin:8px 0 0}
+body.single-product .wc-block-add-to-cart-form .quantity{margin:0}
+body.single-product .wc-block-add-to-cart-form input.qty{height:52px;border:1px solid #dcd7e6;border-radius:6px;background:#fff;font-size:16px}
+body.single-product .wc-block-add-to-cart-form .single_add_to_cart_button{min-height:52px;min-width:190px;margin:0!important;border:0;border-radius:6px;background:#6d3bdf!important;color:#fff!important;font-size:14px;font-weight:800;cursor:pointer}
+body.single-product .wc-block-add-to-cart-form .single_add_to_cart_button:hover{background:#4c249e!important}
+.urumi-product-note{display:flex;gap:14px;align-items:flex-start;margin:22px 0 20px;padding:17px 18px;background:#f2ecff;border:1px solid #e1d6fa;border-radius:8px;color:#30274c}
+.urumi-product-note>span{font-size:25px;line-height:1;color:#6d3bdf}
+.urumi-product-note strong{font-size:13px}
+.urumi-product-note p{margin:6px 0 0;font-size:12px;line-height:1.55;color:#655c74}
+body.single-product .wp-block-woocommerce-product-meta{padding-top:18px;border-top:1px solid #eae5e7;color:#687083;font-size:11px}
+body.single-product .wp-block-woocommerce-product-meta a{color:#5c35b7}
+body.single-product .wp-block-woocommerce-product-details{margin-top:50px}
+body.single-product .wp-block-woocommerce-related-products{margin-top:58px}
+
+/* Keep the checkout disclosure readable without a promotional-style banner. */
+.urumi-checkout-disclosure{margin:0 0 18px;color:#687083;font-size:12px;line-height:1.5}
+body.woocommerce-checkout main.wp-block-group,body.woocommerce-cart main.wp-block-group{overflow:hidden}
+body.woocommerce-checkout .wc-block-checkout,body.woocommerce-cart .wc-block-cart{width:100%;max-width:100%;box-sizing:border-box}
+body.woocommerce-checkout .wc-block-components-sidebar-layout,body.woocommerce-cart .wc-block-components-sidebar-layout{width:100%;max-width:100%}
+body.woocommerce-checkout .wc-block-components-checkout-step__heading,body.woocommerce-cart .wc-block-components-title{color:#172038}
+body.woocommerce-checkout .wc-block-components-order-summary{border:1px solid #e9e5eb;border-radius:7px;overflow:hidden}
+
+@media(max-width:1100px){.urumi-story-card{grid-template-columns:1fr;min-height:0}.urumi-story-image{aspect-ratio:1/.72}.urumi-story-copy{min-height:240px}}
+@media(max-width:700px){.urumi-story-section{padding:42px 0 0}.urumi-story-grid{grid-template-columns:1fr;gap:13px}.urumi-story-image{aspect-ratio:1/.7}.urumi-story-copy{min-height:0;padding:25px}.urumi-story-copy h3{font-size:34px}.urumi-story-section+.urumi-featured{padding-top:55px}body.single-product main .wp-block-columns.alignwide{gap:20px}body.single-product main .wp-block-column>.wp-block-post-title{font-size:40px}body.single-product .wp-block-post-excerpt{font-size:15px}body.single-product .wc-block-add-to-cart-form .single_add_to_cart_button{flex:1;min-width:0}}
+@media(prefers-reduced-motion:reduce){.urumi-story-image img{transition:none}}
+
+.urumi-shop-intro{margin:0 0 31px}
+.urumi-shop-intro p{margin:0 0 18px;color:#626b7e;font-size:15px}
+.urumi-shop-filters{display:flex;flex-wrap:wrap;gap:9px}
+.urumi-shop-filters a,.urumi-shop-filters .is-current{display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:0 14px;border:1px solid #dfd9e8;border-radius:20px;background:#fff;color:#4e5366;font-size:12px;font-weight:750;text-decoration:none}
+.urumi-shop-filters a:hover,.urumi-shop-filters a:focus-visible{border-color:#7b4fe8;color:#542bb0}
+.urumi-shop-filters .is-current{background:#eee8fc;border-color:#d7c9f5;color:#4e2ca3}
+@media(max-width:700px){.urumi-shop-intro{margin-bottom:24px}.urumi-shop-intro p{font-size:13px}.urumi-shop-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:7px;scrollbar-width:none}.urumi-shop-filters::-webkit-scrollbar{display:none}.urumi-shop-filters a,.urumi-shop-filters .is-current{white-space:nowrap;flex:none}}
+
+/* Prompt-like category entry, inspired by the clarity of an interactive landing page. */
+.urumi-discovery-guide{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr);align-items:center;gap:35px;margin-top:16px;padding:34px clamp(24px,3vw,48px);border:1px solid #e3d9ed;border-radius:10px;background:linear-gradient(110deg,#f3edfb,#f8f4ed)}
+.urumi-discovery-lead h2{max-width:390px;margin:10px 0 0;color:#172038;font-size:clamp(25px,2.6vw,38px);line-height:1.1;letter-spacing:-.055em}
+.urumi-discovery-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.urumi-discovery-links a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:47px;padding:8px 16px;border:1px solid #e2dbe9;border-radius:7px;background:#fff;color:#292747!important;text-decoration:none;font-size:13px;font-weight:750;transition:transform .2s,border-color .2s,box-shadow .2s}
+.urumi-discovery-links a span{color:#7140d8;font-size:19px}
+.urumi-discovery-links a:hover{transform:translateY(-2px);border-color:#ab8ae9;box-shadow:0 8px 20px #6d3bdf18}
+@media(max-width:800px){.urumi-discovery-guide{grid-template-columns:1fr;gap:22px}}
+@media(max-width:700px){.urumi-discovery-guide{margin-top:10px;padding:27px 20px}.urumi-discovery-lead h2{font-size:29px}.urumi-discovery-links{gap:7px}.urumi-discovery-links a{min-height:44px;padding:8px 11px;font-size:11px}.urumi-discovery-links a span{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.urumi-discovery-links a{transition:none}}
+
+/* A shoppable, stateful editorial feature: real products and real WooCommerce URLs. */
+.urumi-lookbook{padding:70px 0 22px}
+.urumi-lookbook-heading{max-width:850px;margin:0 auto 34px;text-align:center}
+.urumi-lookbook-heading h2{margin:10px 0 12px;color:#171b30;font-family:Georgia,serif;font-size:clamp(39px,5.3vw,76px);font-weight:400;line-height:1;letter-spacing:-.065em}
+.urumi-lookbook-heading p{margin:0;color:#667084;font-size:15px}
+.urumi-lookbook-shell{display:grid;grid-template-columns:minmax(300px,.78fr) minmax(0,1.22fr);min-height:590px;overflow:hidden;border-radius:15px;background:#f0eaf3;box-shadow:0 20px 50px #25143c12}
+.urumi-lookbook-menu{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:clamp(20px,3.1vw,48px);background:#151a33}
+.urumi-lookbook-tab{position:relative;width:100%;padding:23px 48px 23px 23px;text-align:left;border:1px solid transparent;border-bottom-color:#ffffff27;border-radius:8px;background:transparent;color:#fff;cursor:pointer;transition:background .22s,border-color .22s,transform .22s}
+.urumi-lookbook-tab:hover{background:#ffffff0f}
+.urumi-lookbook-tab.is-active{border-color:#ab91e6;background:#7050c3;transform:translateX(8px)}
+.urumi-lookbook-tab>span:first-child{display:block;color:#cebcfc;font-size:10px;font-weight:800;letter-spacing:.17em}
+.urumi-lookbook-tab strong{display:block;margin:9px 0;font-family:Georgia,serif;font-size:clamp(23px,2.3vw,35px);font-weight:400;line-height:1.05;letter-spacing:-.04em}
+.urumi-lookbook-tab small{display:block;max-width:290px;color:#cdd0e3;font-size:12px;line-height:1.5}
+.urumi-lookbook-tab.is-active small{color:#f2eefe}
+.urumi-lookbook-tab-arrow{position:absolute;right:19px;top:50%;transform:translateY(-50%);color:#dbcaff;font-size:24px}
+.urumi-lookbook-panels{min-width:0;display:grid}
+.urumi-lookbook-panel{grid-area:1/1;min-width:0;display:flex;flex-direction:column;background:#e7e3e2}
+.urumi-lookbook-panel[hidden]{display:none}
+.urumi-lookbook-image{display:block;height:435px;min-height:0;overflow:hidden;background:#e5e0e5}
+.urumi-lookbook-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s}
+.urumi-lookbook-image:hover img{transform:scale(1.035)}
+.urumi-lookbook-product{display:flex;align-items:end;justify-content:space-between;gap:20px;flex:1;padding:25px clamp(25px,3vw,45px);background:#f8f5f1}
+.urumi-lookbook-product>div>span{color:#6f46c6;font-size:10px;font-weight:800;letter-spacing:.18em}
+.urumi-lookbook-product h3{margin:7px 0 2px;color:#1c2338;font-size:22px;line-height:1.1}
+.urumi-lookbook-product p{margin:0;color:#5b6070;font-size:15px}
+.urumi-lookbook-product a{display:inline-flex;align-items:center;gap:20px;white-space:nowrap;padding:12px 15px;border-radius:5px;background:#17203d;color:#fff!important;font-size:12px;font-weight:800;text-decoration:none!important}
+.urumi-lookbook-product a:hover{background:#6944c3}
+.urumi-lookbook-product a span{font-size:18px}
+.urumi-lookbook+.urumi-featured{padding-top:76px}
+
+/* Plain-language demo answers, using native keyboard-accessible disclosures. */
+.urumi-store-questions{display:grid;grid-template-columns:minmax(250px,.75fr) minmax(0,1.25fr);gap:clamp(30px,6vw,100px);margin:15px 0 86px;padding:clamp(35px,5vw,72px);border-radius:15px;background:#eeeaf5}
+.urumi-store-questions-heading h2{max-width:450px;margin:14px 0;color:#171c32;font-family:Georgia,serif;font-size:clamp(38px,4vw,63px);font-weight:400;line-height:1.04;letter-spacing:-.065em}
+.urumi-store-questions-heading p{max-width:300px;color:#62687c;font-size:14px;line-height:1.6}
+.urumi-store-questions-heading>a{display:inline-block;margin-top:17px;padding-bottom:5px;color:#5127af!important;border-bottom:1px solid #9c79df;font-size:13px;font-weight:800;text-decoration:none!important}
+.urumi-store-questions-list{border-top:1px solid #d6cee5}
+.urumi-store-questions-list details{border-bottom:1px solid #d6cee5}
+.urumi-store-questions-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px;padding:14px 0;list-style:none;color:#1d2440;font-size:17px;font-weight:750;cursor:pointer}
+.urumi-store-questions-list summary::-webkit-details-marker{display:none}
+.urumi-store-questions-list summary span{display:grid;place-items:center;flex:none;width:30px;height:30px;border:1px solid #cfc2e6;border-radius:50%;color:#6335bd;font-size:19px;font-weight:400;transition:transform .2s}
+.urumi-store-questions-list details[open] summary span{transform:rotate(45deg)}
+.urumi-store-questions-list details p{max-width:590px;margin:0 34px 24px 0;color:#60687a;font-size:14px;line-height:1.65}
+
+.urumi-mobile-dock{display:none}
+@media(max-width:900px){
+  .urumi-lookbook-shell{grid-template-columns:1fr;min-height:0}
+  .urumi-lookbook-menu{padding:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .urumi-lookbook-tab{padding:16px;min-height:132px;border:1px solid #ffffff29}
+  .urumi-lookbook-tab.is-active{transform:none}
+  .urumi-lookbook-tab strong{font-size:23px}
+  .urumi-lookbook-tab small{display:none}
+  .urumi-lookbook-tab-arrow{right:10px;top:auto;bottom:7px;transform:none}
+  .urumi-store-questions{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:700px){
+  .urumi-lookbook{padding:45px 0 6px}
+  .urumi-lookbook-heading{text-align:left;margin-bottom:21px}
+  .urumi-lookbook-heading h2{font-size:43px}
+  .urumi-lookbook-heading p{font-size:13px;line-height:1.5}
+  .urumi-lookbook-menu{gap:6px}
+  .urumi-lookbook-tab{min-height:94px;padding:12px 10px}
+  .urumi-lookbook-tab>span:first-child{font-size:8px;letter-spacing:.07em}
+  .urumi-lookbook-tab strong{font-family:inherit;font-size:15px;line-height:1.17;font-weight:700}
+  .urumi-lookbook-tab-arrow{display:none}
+  .urumi-lookbook-image{height:auto;aspect-ratio:1/.8}
+  .urumi-lookbook-product{align-items:start;flex-direction:column;padding:20px;gap:16px}
+  .urumi-lookbook-product h3{font-size:21px}
+  .urumi-lookbook-product a{width:100%;justify-content:space-between}
+  .urumi-lookbook+.urumi-featured{padding-top:52px}
+  .urumi-store-questions{margin:5px 0 35px;padding:30px 22px}
+  .urumi-store-questions-heading h2{font-size:42px}
+  .urumi-store-questions-list summary{min-height:62px;font-size:14px}
+  .urumi-store-questions-list details p{font-size:12px}
+  body:has(.urumi-mobile-dock){padding-bottom:68px}
+  .urumi-mobile-dock{position:fixed;z-index:999;right:0;bottom:0;left:0;display:grid;grid-template-columns:repeat(3,1fr);min-height:64px;padding:4px 9px env(safe-area-inset-bottom);border-top:1px solid #e6deec;background:#fffdfa;box-shadow:0 -8px 24px #1e1a3519}
+  .urumi-mobile-dock a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#51566a!important;text-decoration:none!important;font-size:10px;font-weight:750}
+  .urumi-mobile-dock a[aria-current=page]{color:#6335bd!important}
+  .urumi-mobile-dock a>span{font-size:22px;line-height:1}
+  .urumi-mobile-dock small{position:absolute;top:2px;left:calc(50% + 10px);min-width:15px;height:15px;display:grid;place-items:center;border-radius:50%;background:#7044cf;color:#fff;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.urumi-lookbook-tab,.urumi-lookbook-image img,.urumi-store-questions-list summary span{transition:none}}
+
+/* The homepage moves from a dark retail banner to an airy, prompt-led editorial cover. */
+body.home{background:#faf8f4;overflow-x:clip}
+body.home .urumi-retail-announcement{display:none}
+body.home .urumi-site-header{background:rgba(255,255,255,.88);border-color:#e8e4e7;box-shadow:0 4px 20px #2225410a}
+body.home .urumi-header-inner{grid-template-columns:auto 1fr auto}
+body.home .urumi-header-inner .urumi-product-search{display:none}
+body.home .urumi-category-nav{background:rgba(255,255,255,.88)}
+body.home .urumi-storefront{width:100vw;max-width:none;left:50%;transform:translateX(-50%)}
+body.home .urumi-storefront>section:not(.urumi-hero){box-sizing:border-box;width:min(1510px,calc(100vw - 52px));margin-left:auto;margin-right:auto}
+body.home .urumi-hero{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:790px;margin:0;padding:clamp(65px,8vw,120px) 24px 31px;border:0;border-radius:0;background:linear-gradient(180deg,rgba(242,248,255,.28),rgba(245,247,250,.06) 65%,rgba(22,28,53,.17)),url('/wp-content/mu-plugins/urumi-assets/hero-airy-v2.webp') center center/cover no-repeat;box-shadow:none}
+body.home .urumi-hero-copy{width:min(850px,100%);max-width:none;margin:auto;text-align:center}
+body.home .urumi-hero .urumi-eyebrow{color:#4e4190;font-size:11px;letter-spacing:.23em}
+body.home .urumi-hero h1{margin:23px 0 19px;color:#171e36;font-family:Georgia,serif;font-size:clamp(58px,7vw,112px);font-weight:400;line-height:.99;letter-spacing:-.075em;text-wrap:balance}
+body.home .urumi-hero h1 em{display:inline-block;color:#6637b9;font-family:Georgia,serif;font-style:italic;font-weight:400}
+body.home .urumi-hero-copy>p{max-width:none;margin:0 0 34px;color:#424a5e;font-size:18px;line-height:1.5}
+.urumi-hero-search{display:flex;align-items:center;width:min(690px,100%);min-height:74px;margin:0 auto;overflow:hidden;border:1px solid #e5e1e8;border-radius:15px;background:#fff;box-shadow:0 18px 42px #1c27492c;transition:box-shadow .2s,border-color .2s}
+.urumi-hero-search:focus-within{border-color:#744bd2;box-shadow:0 0 0 4px #d9c9fa,0 18px 42px #1c274929}
+.urumi-hero-search input[type=search]{flex:1;min-width:0;height:74px;padding:0 24px;border:0!important;outline:0!important;background:transparent;color:#1d2440;font-size:17px}
+.urumi-hero-search input::placeholder{color:#6c7281}
+.urumi-hero-search button{align-self:stretch;display:flex;align-items:center;gap:22px;margin:8px;padding:0 21px;border:0;border-radius:10px;background:#6137bd;color:#fff;font-size:14px;font-weight:800;cursor:pointer}
+.urumi-hero-search button:hover{background:#4e289d}
+.urumi-hero-search button span{font-size:20px}
+.urumi-hero-prompts{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:15px 0 0}
+.urumi-hero-prompts>span{margin-right:3px;color:#303a57;font-size:10px;font-weight:900;letter-spacing:.13em}
+.urumi-hero-prompts a{padding:8px 13px;border:1px solid #ffffffc9;border-radius:100px;background:#ffffffdb;color:#3a3452!important;font-size:12px;font-weight:750;text-decoration:none!important;box-shadow:0 6px 18px #24334412;transition:background .2s,transform .2s}
+.urumi-hero-prompts a:hover{background:#fff;transform:translateY(-2px)}
+.urumi-hero-bottom{display:flex;justify-content:space-between;gap:20px;width:min(1450px,100%);margin-top:auto;color:#fff;font-size:10px;font-weight:900;letter-spacing:.17em;text-shadow:0 2px 6px #17182777}
+.urumi-hero-bottom a{color:#fff!important;text-decoration:none!important}
+.urumi-hero-bottom a span{margin-left:9px;font-size:15px}
+
+/* Numbered chapters and expressive typography inspired by a scroll-led landing page. */
+.urumi-manifesto{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.7fr);gap:35px;align-items:end;padding:clamp(68px,8vw,125px) clamp(18px,3vw,40px) 50px}
+.urumi-manifesto>.urumi-eyebrow{grid-column:1/-1;margin-bottom:-12px}
+.urumi-manifesto h2{margin:0;color:#181e36;font-family:Georgia,serif;font-size:clamp(43px,5.2vw,82px);font-weight:400;line-height:1.05;letter-spacing:-.065em}
+.urumi-manifesto h2 em{color:#6941be;font-weight:400}
+.urumi-manifesto>div{padding-bottom:9px}
+.urumi-manifesto p{margin:0 0 22px;color:#545d70;font-size:16px;line-height:1.75}
+.urumi-manifesto a{display:inline-flex;gap:25px;align-items:center;padding-bottom:6px;border-bottom:1px solid #7144cb;color:#5632a7!important;font-size:13px;font-weight:800;text-decoration:none!important}
+.urumi-manifesto a span{font-size:19px}
+body.home .urumi-category-section{padding-top:58px}
+body.home .urumi-category-card{aspect-ratio:1/.85;border-radius:14px}
+body.home .urumi-category-card img{filter:saturate(.9)}
+body.home .urumi-category-card-copy{bottom:26px;left:25px}
+body.home .urumi-featured{padding-bottom:92px}
+.urumi-footer-search{width:min(420px,100%);flex:none}
+.urumi-footer-search label{display:block;margin-bottom:12px;color:#57438a;font-size:10px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+.urumi-footer-search>div{display:flex;align-items:center;min-height:56px;overflow:hidden;border:1px solid #d6cce5;border-radius:9px;background:#fff}
+.urumi-footer-search:focus-within>div{outline:3px solid #c4aeed}
+.urumi-footer-search input[type=search]{flex:1;min-width:0;padding:0 17px;border:0!important;outline:0!important;background:transparent;color:#222943;font-size:14px}
+.urumi-footer-search button{width:42px;height:42px;margin-right:7px;border:0;border-radius:7px;background:#6339c1;color:#fff;font-size:21px;cursor:pointer}
+.urumi-footer-search button:hover{background:#4a259e}
+
+@media(max-width:900px){
+  .urumi-manifesto{grid-template-columns:1fr}
+  .urumi-manifesto>.urumi-eyebrow{margin:0}
+  .urumi-manifesto>div{max-width:560px}
+  .urumi-footer-search{width:100%}
+}
+@media(max-width:700px){
+  body.home .urumi-header-inner{grid-template-columns:1fr auto;grid-template-rows:1fr;min-height:70px}
+  body.home .urumi-storefront>section:not(.urumi-hero){width:calc(100vw - 24px)}
+  body.home .urumi-hero{min-height:750px;padding:68px 20px 20px;background:linear-gradient(180deg,rgba(244,250,255,.22),rgba(244,250,255,.10) 65%,rgba(13,18,42,.26)),url('/wp-content/mu-plugins/urumi-assets/hero-airy-v2.webp') 54% center/cover no-repeat}
+  body.home .urumi-hero-copy{margin:0 auto}
+  body.home .urumi-hero .urumi-eyebrow{font-size:9px}
+  body.home .urumi-hero h1{font-size:clamp(46px,10.5vw,70px);margin:18px 0}
+  body.home .urumi-hero-copy>p{font-size:14px;max-width:300px;margin:0 auto 23px}
+  .urumi-hero-search{min-height:60px;border-radius:12px}
+  .urumi-hero-search input[type=search]{height:60px;padding:0 13px;font-size:13px}
+  .urumi-hero-search button{padding:0 12px;margin:6px;gap:5px;font-size:12px}
+  .urumi-hero-search button span{font-size:16px}
+  .urumi-hero-prompts{gap:7px;margin-top:12px}
+  .urumi-hero-prompts>span{width:100%}
+  .urumi-hero-prompts a{font-size:10px;padding:7px 9px}
+  .urumi-hero-bottom{font-size:8px;line-height:1.4}
+  .urumi-hero-bottom span:first-child{max-width:140px}
+  .urumi-manifesto{padding:60px 8px 20px;gap:20px}
+  .urumi-manifesto h2{font-size:clamp(39px,10vw,56px)}
+  .urumi-manifesto p{font-size:14px}
+  body.home .urumi-category-section{padding-top:45px}
+  body.home .urumi-category-card{aspect-ratio:1/.58}
+  .urumi-footer-search{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.urumi-hero-search,.urumi-hero-prompts a{transition:none}}
+
+/* A denser storefront rhythm: products arrive within the first scroll. */
+body.home .urumi-hero{min-height:585px;padding-top:42px;padding-bottom:25px;background-position:center 55%}
+body.home .urumi-hero-copy{margin:0 auto auto}
+body.home .urumi-hero h1{font-size:clamp(56px,6.2vw,86px)}
+body.home .urumi-hero-copy>p{margin-bottom:18px}
+body.home .urumi-hero-search,body.home .urumi-hero-search input[type=search]{min-height:66px;height:66px}
+.urumi-quick-picks{position:relative;z-index:2;display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:stretch;min-height:158px;margin-top:-96px;padding:15px;border:1px solid #ede7e4;border-radius:17px;background:#fff;box-shadow:0 20px 50px #1b214224}
+.urumi-quick-picks-intro{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:8px 16px}
+.urumi-quick-picks-intro>span{color:#6940bd;font-size:10px;font-weight:850;letter-spacing:.17em}
+.urumi-quick-picks-intro h2{margin:10px 0 12px;color:#1a2239;font-family:Georgia,serif;font-size:28px;font-weight:400;line-height:1.05;letter-spacing:-.055em}
+.urumi-quick-picks-intro>a{color:#5d33ac!important;font-size:12px;font-weight:800;text-decoration:none!important;border-bottom:1px solid #a18bce}
+.urumi-quick-picks-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;min-width:0}
+.urumi-quick-pick{position:relative;display:flex;align-items:center;gap:12px;min-width:0;padding:9px;border:1px solid #eee8e4;border-radius:11px;background:#faf8f4;color:#1c2338!important;text-decoration:none!important;transition:transform .2s,border-color .2s,box-shadow .2s}
+.urumi-quick-pick:hover{transform:translateY(-3px);border-color:#bdabdf;box-shadow:0 9px 22px #291d4b16}
+.urumi-quick-pick>img{flex:none;width:90px;height:108px;border-radius:7px;object-fit:cover;background:#eee8e3}
+.urumi-quick-pick>span:nth-child(2){display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding-right:10px}
+.urumi-quick-pick small{color:#7953b9;font-size:9px;font-weight:850;letter-spacing:.13em}
+.urumi-quick-pick strong{margin:7px 0;color:#1c2338;font-size:15px;line-height:1.2}
+.urumi-quick-pick-price{color:#384055;font-size:13px;font-weight:750}
+.urumi-quick-pick-arrow{position:absolute;right:10px;top:10px;color:#7953b9;font-size:18px}
+body.home .urumi-category-section{padding-top:65px;padding-bottom:25px}
+body.home .urumi-category-card{aspect-ratio:1/.72}
+body.home .urumi-category-card-copy{bottom:20px;left:20px}
+body.home .urumi-category-card-copy strong{font-size:clamp(19px,1.7vw,27px)}
+body.home .urumi-manifesto{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);grid-template-rows:auto auto 1fr;gap:15px 50px;align-items:start;margin-top:70px;padding:clamp(38px,5vw,68px);overflow:hidden;border-radius:18px;background:#181e3b;color:#fff}
+body.home .urumi-manifesto>.urumi-eyebrow{grid-column:1;grid-row:1;margin:0;color:#c4adfa}
+body.home .urumi-manifesto h2{grid-column:1;grid-row:2;margin:0;color:#fff;font-size:clamp(43px,4.4vw,66px)}
+body.home .urumi-manifesto h2 em{color:#c7aff7}
+body.home .urumi-manifesto>div{grid-column:1;grid-row:3;align-self:end;max-width:550px;padding:0}
+body.home .urumi-manifesto p{margin:0 0 24px;color:#d7d7e5}
+body.home .urumi-manifesto a{color:#fff!important;border-color:#beaff0}
+body.home .urumi-manifesto:after{content:'';grid-column:2;grid-row:1/4;display:block;min-height:410px;height:100%;border-radius:10px;background:url('/wp-content/mu-plugins/urumi-assets/store-hero.webp') center/cover no-repeat}
+body.home .urumi-lookbook{padding-top:72px}
+body.home .urumi-featured{padding-top:72px}
+.urumi-product-filters{display:flex;flex-wrap:wrap;gap:9px;margin:-3px 0 27px}
+.urumi-product-filters button{min-height:39px;padding:8px 15px;border:1px solid #ded8e7;border-radius:999px;background:#fff;color:#464758;font-size:12px;font-weight:800;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.urumi-product-filters button:hover{border-color:#754fc6;color:#6338af}
+.urumi-product-filters button[aria-pressed=true]{border-color:#251d49;background:#251d49;color:#fff}
+body.home .urumi-product-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:25px 16px}
+body.home .urumi-product-card{padding:10px;border:1px solid #e9e3e5;border-radius:12px;background:#fff;box-shadow:0 10px 24px #1d244309!important;transition:transform .2s,box-shadow .2s}
+body.home .urumi-product-card:hover{transform:translateY(-4px);box-shadow:0 16px 28px #1d24431a!important}
+body.home .urumi-product-card[hidden]{display:none!important}
+body.home .urumi-product-image{aspect-ratio:1/.92;border-radius:7px}
+body.home .urumi-product-info{padding:13px 3px 8px}
+body.home .urumi-card-add{margin:4px 3px 2px}
+@media(max-width:1180px){.urumi-quick-picks{grid-template-columns:190px minmax(0,1fr)}.urumi-quick-pick>img{width:70px;height:95px}.urumi-quick-pick strong{font-size:13px}}
+@media(max-width:950px){.urumi-quick-picks{grid-template-columns:1fr}.urumi-quick-picks-intro{padding:0 7px;display:flex;flex-direction:row;align-items:baseline;gap:15px}.urumi-quick-picks-intro h2{margin:0}.urumi-quick-picks-intro>a{margin-left:auto}body.home .urumi-manifesto{grid-template-columns:1fr}body.home .urumi-manifesto:after{grid-column:1;grid-row:4;min-height:260px;margin-top:10px}body.home .urumi-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+  body.home .urumi-hero{min-height:570px;padding:51px 16px 20px;background-position:55% center}
+  body.home .urumi-hero h1{font-size:clamp(43px,10vw,58px)}
+  body.home .urumi-hero-search,body.home .urumi-hero-search input[type=search]{min-height:60px;height:60px}
+  .urumi-quick-picks{display:block;width:calc(100vw - 24px)!important;min-height:0;margin-top:-37px;padding:12px;border-radius:14px}
+  .urumi-quick-picks-intro{display:flex;flex-wrap:wrap;align-items:center;gap:5px 10px;padding:2px 2px 12px}
+  .urumi-quick-picks-intro>span{width:100%}
+  .urumi-quick-picks-intro h2{font-size:25px}
+  .urumi-quick-picks-intro>a{font-size:11px}
+  .urumi-quick-picks-list{display:flex;gap:9px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:3px;scrollbar-width:none}
+  .urumi-quick-picks-list::-webkit-scrollbar{display:none}
+  .urumi-quick-picks:after{content:'SWIPE TO SEE MORE →';display:block;margin:7px 3px 0;color:#7553ad;font-size:9px;font-weight:850;letter-spacing:.11em}
+  .urumi-quick-pick{flex:0 0 min(70vw,265px);scroll-snap-align:start}
+  .urumi-quick-pick>img{width:72px;height:86px}
+  body.home .urumi-category-section{padding-top:48px;padding-bottom:10px}
+  body.home .urumi-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body.home .urumi-category-card{aspect-ratio:1/.95}
+  body.home .urumi-category-card-copy{left:11px;right:9px;bottom:10px}
+  body.home .urumi-category-card-copy small{font-size:9px}
+  body.home .urumi-category-card-copy strong{font-size:17px}
+  body.home .urumi-manifesto{margin-top:45px;padding:30px 23px;gap:14px}
+  body.home .urumi-manifesto h2{font-size:clamp(38px,9vw,52px)}
+  body.home .urumi-manifesto:after{min-height:210px}
+  body.home .urumi-lookbook,body.home .urumi-featured{padding-top:55px}
+  .urumi-product-filters{flex-wrap:nowrap;overflow-x:auto;margin-bottom:20px;padding-bottom:7px;scrollbar-width:none}
+  .urumi-product-filters::-webkit-scrollbar{display:none}
+  .urumi-product-filters button{flex:none;white-space:nowrap;font-size:11px}
+  body.home .urumi-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  body.home .urumi-product-card{padding:6px}
+  body.home .urumi-product-image{aspect-ratio:1/1}
+  body.home .urumi-product-info{flex-direction:column;align-items:start;gap:2px}
+  body.home .urumi-product-info h3{font-size:14px}
+  body.home .urumi-product-price{font-size:13px}
+  body.home .urumi-card-add{min-height:34px;padding:6px 8px;font-size:10px}
+}
+@media(max-width:390px){body.home .urumi-category-grid{grid-template-columns:1fr}body.home .urumi-category-card{aspect-ratio:1/.56}}
+@media(prefers-reduced-motion:reduce){.urumi-quick-pick,.urumi-product-filters button,body.home .urumi-product-card{transition:none}}
+
+/* The full catalogue is server-filtered, so counts and pagination stay truthful. */
+.urumi-catalog{width:100%;max-width:none;margin:18px 0 10px}
+.urumi-catalog-head{display:flex;align-items:end;justify-content:space-between;gap:24px;padding:28px 0;border-top:1px solid #e7e1e8}
+.urumi-catalog-head>.wc-block-components-notices{display:none!important}
+.urumi-catalog-head h2{margin:8px 0 8px;color:#172038;font-size:clamp(28px,3vw,43px);line-height:1.1;letter-spacing:-.05em}
+.urumi-catalog-head p{margin:0;color:#667084;font-size:15px}
+.urumi-catalog-total{flex:none;padding:9px 13px;border:1px solid #e4dfea;border-radius:999px;color:#5b427e;font-size:12px;font-weight:800}
+.urumi-catalog-controls{display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:end;gap:12px;padding:17px;border:1px solid #e8e2eb;border-radius:12px;background:#f9f7fb}
+.urumi-catalog-controls label{display:grid;gap:6px;color:#54556b;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.urumi-catalog-controls select{box-sizing:border-box;width:100%;min-height:47px;padding:0 35px 0 13px;border:1px solid #ddd7e7;border-radius:7px;background:#fff;color:#172038;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none}
+.urumi-catalog-controls select:focus-visible,.urumi-catalog-controls button:focus-visible,.urumi-catalog-pages a:focus-visible{outline:3px solid #bba0fa;outline-offset:2px}
+.urumi-catalog-controls button{min-height:47px;padding:0 18px;border:0;border-radius:7px;background:#6d3bdf;color:#fff;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.urumi-catalog-controls button:hover{background:#4e22b0}
+.urumi-catalog-status{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:65px;color:#667084;font-size:13px}
+.urumi-catalog-status p{margin:0}.urumi-catalog-status a{color:#5b30be;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.urumi-catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.urumi-catalog-card{min-width:0;overflow:hidden;border:1px solid #e9e4e9;border-radius:11px;background:#fff;box-shadow:0 9px 22px #23213b0a;transition:transform .2s,box-shadow .2s}
+.urumi-catalog-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px #23213b1a}
+.urumi-catalog-photo{position:relative;display:block;margin:9px 9px 0;overflow:hidden;border-radius:7px;aspect-ratio:1/.82;background:#eee9e2}
+.urumi-catalog-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.urumi-catalog-card:hover .urumi-catalog-photo img{transform:scale(1.04)}
+.urumi-catalog-photo>span:last-child{position:absolute;right:11px;bottom:11px;display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:#fff;color:#5a2ec0;font-size:19px}
+.urumi-catalog-card-copy{padding:18px 19px 19px}
+.urumi-catalog-card-copy h3{margin:7px 0 6px;color:#172038;font-size:20px;line-height:1.2;letter-spacing:-.03em}
+.urumi-catalog-card-copy h3 a{color:inherit;text-decoration:none}.urumi-catalog-card-copy h3 a:hover{color:#6030c5}
+.urumi-catalog-card-copy>p{min-height:39px;margin:0 0 20px;color:#6b7181;font-size:13px;line-height:1.5}
+.urumi-catalog-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid #efeaf0}
+.urumi-catalog-card-bottom strong{color:#222341;font-size:17px;white-space:nowrap}
+.urumi-catalog-card-bottom a{padding:9px 12px;border:1px solid #ded3ed;border-radius:6px;color:#5e34b4;font-size:12px;font-weight:850;text-align:center;text-decoration:none;white-space:nowrap}
+.urumi-catalog-card-bottom a:hover{border-color:#6d3bdf;background:#f5f0ff}
+.urumi-catalog-pages{display:flex;justify-content:center;gap:8px;padding:35px 0 15px}
+.urumi-catalog-pages a{display:grid;place-items:center;min-width:39px;height:39px;border:1px solid #dfd6ea;border-radius:7px;color:#51359b;font-size:13px;font-weight:850;text-decoration:none}
+.urumi-catalog-pages a[aria-current=page]{border-color:#6d3bdf;background:#6d3bdf;color:#fff}
+.urumi-catalog-empty{padding:55px 20px;border:1px solid #e4daf1;border-radius:11px;background:linear-gradient(135deg,#f9f6ff,#fffdf9);text-align:center}.urumi-catalog-empty>span{display:grid;place-items:center;width:48px;height:48px;margin:0 auto 16px;border-radius:15px;background:#ece2ff;color:#6d3bdf;font-size:25px}.urumi-catalog-empty h2{margin:0 0 8px;font-size:24px}.urumi-catalog-empty p{color:#667084}.urumi-catalog-empty a{display:inline-flex;margin-top:7px;padding:10px 14px;border:1px solid #d9c9f0;border-radius:6px;background:#fff;color:#5b30be;font-size:13px;font-weight:800;text-decoration:none}.urumi-catalog-empty a:hover{background:#f3eaff}
+
+/* Real photo viewing, with the single-photo crop labelled accurately. */
+body.single-product .urumi-detail-gallery{max-width:100%}
+.urumi-detail-main{position:relative;display:block;width:100%;padding:0;overflow:hidden;border:0;border-radius:11px;background:#edeae3;cursor:zoom-in}
+.urumi-detail-main img{display:block;width:100%;aspect-ratio:1/.94;object-fit:cover;transition:transform .25s}
+.urumi-detail-main.is-cropped img{transform:scale(1.32)}
+.urumi-detail-main>span{position:absolute;right:15px;bottom:15px;padding:9px 12px;border-radius:6px;background:#fff;color:#172038;font-size:12px;font-weight:800;box-shadow:0 4px 14px #0002}
+.urumi-detail-views{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.urumi-detail-views button{display:flex;align-items:center;gap:8px;min-height:56px;padding:5px 11px 5px 5px;border:1px solid #e3ddea;border-radius:7px;background:#fff;color:#56546a;font-size:12px;font-weight:800;cursor:pointer}
+.urumi-detail-views button[aria-pressed=true]{border-color:#6d3bdf;background:#f5f0ff;color:#542cae}
+.urumi-detail-views img{width:44px;height:44px;border-radius:4px;object-fit:cover}
+.urumi-detail-views button[data-crop=true] img{object-position:center;transform:scale(1.1)}
+.urumi-detail-photo-note{margin:8px 0;color:#798094;font-size:11px;line-height:1.5}
+.urumi-detail-dialog{max-width:min(90vw,1000px);max-height:90vh;padding:14px;border:0;border-radius:12px;background:#fff;box-shadow:0 25px 80px #080c1e80}
+.urumi-detail-dialog::backdrop{background:#080b20c9}
+.urumi-detail-dialog img{display:block;max-width:100%;max-height:calc(90vh - 28px);object-fit:contain}
+.urumi-detail-dialog button{position:absolute;top:20px;right:20px;width:39px;height:39px;border:0;border-radius:50%;background:#12192b;color:#fff;font-size:25px;cursor:pointer}
+.urumi-detail-facts{margin:20px 0;padding:19px 20px;border:1px solid #e9e3ee;border-radius:9px;background:#fbf9fc}
+.urumi-detail-facts h2{margin:0 0 9px;color:#172038;font-size:16px;letter-spacing:-.02em}
+.urumi-detail-facts p{margin:0 0 10px;color:#5c6272;font-size:13px;line-height:1.6}
+.urumi-detail-facts ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.urumi-detail-facts li{padding:6px 9px;border-radius:5px;background:#f0ebf7;color:#5c4b72;font-size:11px;font-weight:700}
+.urumi-mobile-product-bar{display:none}
+
+/* Retain WooCommerce's working transaction controls; make the journey clearer. */
+.urumi-checkout-steps{display:flex;align-items:center;gap:12px;margin:0 0 17px;color:#9c94ab;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.urumi-checkout-steps>span:first-child,.urumi-checkout-steps>span:last-child{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #e3ddea;border-radius:999px}
+.urumi-checkout-steps .is-current{border-color:#6d3bdf!important;background:#f2eaff;color:#5b30bc}
+body.woocommerce-cart .wc-block-cart,body.woocommerce-checkout .wc-block-checkout{padding:18px;border:1px solid #ece6ee;border-radius:11px;background:#fff}
+body.woocommerce-cart .wc-block-components-product-name,body.woocommerce-checkout .wc-block-components-product-name{color:#20223d!important;font-weight:800}
+body.woocommerce-cart .wc-block-components-button:not(.is-link),body.woocommerce-checkout .wc-block-components-button:not(.is-link){min-height:48px;border-radius:7px!important;background:#6d3bdf!important;color:#fff!important;font-weight:800!important}
+
+@media(max-width:1000px){.urumi-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+  .urumi-catalog{margin-top:18px}
+  .urumi-catalog-head{align-items:start;padding:19px 0;gap:10px}.urumi-catalog-head h2{font-size:29px}.urumi-catalog-head p{font-size:13px}.urumi-catalog-total{font-size:10px}
+  .urumi-catalog-controls{grid-template-columns:1fr 1fr;gap:10px;padding:11px}.urumi-catalog-controls label:last-of-type{grid-column:1/-1}.urumi-catalog-controls button{grid-column:1/-1}
+  .urumi-catalog-status{align-items:start;flex-direction:column;justify-content:center;gap:5px;padding:14px 0;font-size:12px}
+  .urumi-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.urumi-catalog-photo{margin:5px 5px 0;aspect-ratio:1/1}.urumi-catalog-card-copy{padding:10px}.urumi-catalog-card-copy h3{font-size:14px}.urumi-catalog-card-copy>p{display:-webkit-box;min-height:0;margin-bottom:12px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:11px}.urumi-catalog-card-bottom{align-items:stretch;flex-direction:column;gap:8px}.urumi-catalog-card-bottom strong{font-size:14px}.urumi-catalog-card-bottom a{font-size:11px}
+  body.single-product{padding-bottom:75px}.urumi-mobile-product-bar{position:fixed;z-index:50;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #e4dcec;background:#fff;box-shadow:0 -8px 25px #14213d1f}.urumi-mobile-product-bar>div{display:grid;gap:2px;min-width:0}.urumi-mobile-product-bar small{overflow:hidden;color:#747486;font-size:10px;text-overflow:ellipsis;white-space:nowrap}.urumi-mobile-product-bar strong{color:#20223d;font-size:15px}.urumi-mobile-product-bar button{flex:none;min-height:44px;padding:0 13px;border:0;border-radius:6px;background:#6d3bdf;color:#fff;font-size:11px;font-weight:850}
+  .urumi-detail-main img{aspect-ratio:1/1}.urumi-detail-views button{font-size:11px}.urumi-checkout-steps{font-size:10px}body.woocommerce-cart .wc-block-cart,body.woocommerce-checkout .wc-block-checkout{padding:10px}
+}
+@media(max-width:380px){.urumi-catalog-grid{grid-template-columns:1fr}.urumi-catalog-card-copy h3{font-size:17px}.urumi-catalog-card-bottom{align-items:center;flex-direction:row}}
+@media(prefers-reduced-motion:reduce){.urumi-catalog-card,.urumi-catalog-photo img,.urumi-detail-main img{transition:none}}
+
+/* A compact editorial collection header keeps real products in the first viewport. */
+body.urumi-retail-archive main.wp-block-group{margin:14px auto 54px;padding:23px clamp(20px,3vw,38px)}
+body.urumi-retail-archive .wc-block-breadcrumbs{margin-bottom:3px}
+body.urumi-retail-archive .urumi-catalog{margin:0}
+body.urumi-retail-archive .urumi-catalog-head{padding:13px 0 20px;border-top:0}
+body.urumi-retail-archive main .urumi-catalog-head h1{max-width:830px;margin:6px 0;color:#172038;font-size:clamp(37px,4vw,57px);line-height:1.02;letter-spacing:-.065em}
+body.urumi-retail-archive .urumi-catalog-controls{padding:12px}
+body.urumi-retail-archive .urumi-catalog-status{min-height:44px}
+.urumi-catalog-controls button[aria-busy=true],.urumi-catalog-card-bottom a[aria-busy=true]{opacity:.75;pointer-events:none}
+.urumi-cart-confirm{display:flex;align-items:center;gap:13px;margin:0 0 18px;padding:16px 19px;border:1px solid #b9dfc5;border-radius:10px;background:#effaf1;color:#19492d}
+.urumi-cart-confirm>span{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:#1b8d4c;color:#fff;font-size:17px;font-weight:800}
+.urumi-cart-confirm strong{display:block;font-size:15px}.urumi-cart-confirm p{margin:3px 0 0;color:#3b654a;font-size:12px}
+@media(max-width:700px){body.urumi-retail-archive main.wp-block-group{margin:10px auto 30px;padding:17px 15px}body.urumi-retail-archive .urumi-catalog-head{align-items:start;padding:14px 0 18px}body.urumi-retail-archive main .urumi-catalog-head h1{font-size:clamp(31px,8vw,39px)}body.urumi-retail-archive .urumi-catalog-controls{padding:10px}body.urumi-retail-archive .urumi-catalog-status{min-height:0}.urumi-cart-confirm{align-items:flex-start;padding:13px}}
+
+/* Retail navigation and editorial closing section, inspired by clear brand-site hierarchy. */
+.urumi-retail-announcement,body.home .urumi-retail-announcement{display:flex;min-height:30px;gap:17px;background:#171d39;color:#f3eefc;font-size:11px}
+.urumi-retail-announcement a{color:#e4d6ff;border-color:#a98df1}
+.urumi-site-header,body.home .urumi-site-header{background:#fff;border-color:#e9e5ee;box-shadow:0 8px 24px #10152e0a}
+.urumi-header-inner,body.home .urumi-header-inner{width:min(1450px,100%);min-height:76px;margin:auto;grid-template-columns:auto minmax(270px,520px) auto;gap:clamp(22px,3.5vw,64px)}
+body.home .urumi-header-inner .urumi-product-search{display:flex}
+.urumi-product-search{height:45px;border-color:#e2dce9;border-radius:99px;background:#f8f6fa}
+.urumi-product-search:focus-within{border-color:#6d3bdf;box-shadow:0 0 0 3px #e9dcff}
+.urumi-search-glyph{flex:none;margin-left:17px;color:#6140ad;font-family:Georgia,serif;font-size:25px;line-height:1}
+.urumi-product-search input[type=search]{padding-left:10px;font-size:12px}
+.urumi-product-search button{min-width:83px;margin:4px;border-radius:99px;background:#6d3bdf;font-size:11px}
+.urumi-header-actions{gap:17px!important}
+.urumi-header-actions .urumi-account-link{border-bottom:1px solid transparent}
+.urumi-header-actions .urumi-account-link:hover{border-color:#6d3bdf}
+.urumi-cart-link{display:inline-flex!important;align-items:center;gap:7px;min-height:43px;box-sizing:border-box;padding:7px 10px;border-radius:99px}
+.urumi-cart-link svg{width:17px;height:17px}
+.urumi-cart-link span{display:grid;place-items:center;flex:none;margin-left:1px;border-radius:50%;font-size:11px}
+.urumi-category-nav,body.home .urumi-category-nav{background:#fff}
+.urumi-category-nav>div{width:min(1450px,100%);gap:clamp(20px,2.8vw,38px)}
+.urumi-category-nav a{min-height:43px;font-size:12px}
+.urumi-site-footer{padding:27px clamp(24px,5vw,80px) 0;background:#f7f4f0}
+.urumi-footer-cta{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:stretch;gap:0;min-height:340px;width:min(1450px,100%);padding:0;overflow:hidden;border:0;border-radius:16px;background:#191f3d;color:#fff;box-shadow:0 16px 40px #151a2a1b}
+.urumi-footer-cta-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(34px,5vw,70px)}
+.urumi-footer-eyebrow{color:#c9afff}
+.urumi-footer-cta h2{max-width:650px;margin:13px 0;color:#fff;font-family:Georgia,serif;font-size:clamp(40px,4.2vw,66px);font-weight:400;line-height:1.02;letter-spacing:-.06em}
+.urumi-footer-cta h2 em{color:#c6a7ff;font-weight:400}
+.urumi-footer-cta p{max-width:550px;color:#d4d5e3;line-height:1.6}
+.urumi-footer-cta-actions{display:flex;align-items:center;flex-wrap:wrap;gap:21px;margin-top:28px}
+.urumi-footer-main-link{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;min-height:45px;padding:0 18px;border-radius:6px;background:#fff;color:#28204b!important;font-size:12px;font-weight:850;text-decoration:none!important}
+.urumi-footer-main-link:hover{background:#eee3ff}
+.urumi-footer-main-link span{font-size:19px}
+.urumi-footer-secondary-link{color:#f6f0ff!important;font-size:12px;font-weight:750;text-decoration:none!important;border-bottom:1px solid #b5a2dd;padding-bottom:4px}
+.urumi-footer-secondary-link:hover{color:#d0b7ff!important}
+.urumi-footer-visual{position:relative;min-height:340px;display:block;background:linear-gradient(90deg,#191f3d17,#191f3d00 55%),url('/wp-content/mu-plugins/urumi-assets/store-hero.webp') 69% center/cover no-repeat;text-decoration:none!important}
+.urumi-footer-visual:after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#14183181);pointer-events:none}
+.urumi-footer-visual-tag{position:absolute;z-index:1;right:22px;bottom:19px;left:22px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px;border:1px solid #ffffff8c;border-radius:6px;background:#141a32ab;backdrop-filter:blur(10px);color:#fff;font-size:10px;font-weight:900;letter-spacing:.13em}
+.urumi-footer-visual-tag span{font-size:17px}
+.urumi-footer-inner{width:min(1450px,100%);grid-template-columns:1.4fr 1fr .85fr 1.25fr;gap:clamp(28px,4vw,70px);padding:55px 0}
+.urumi-footer-inner h2{margin-bottom:21px;color:#654395}
+.urumi-footer-brand-line{margin-top:14px}
+.urumi-footer-bottom{width:min(1450px,100%);min-height:58px}
+.urumi-footer-bottom a{color:#56526c;text-decoration:none;font-weight:750}
+.urumi-footer-bottom a:hover{color:#6d3bdf}
+@media(max-width:1100px){.urumi-header-inner,body.home .urumi-header-inner{grid-template-columns:auto minmax(190px,1fr) auto;gap:20px}.urumi-footer-cta{grid-template-columns:1fr .8fr}.urumi-footer-inner{grid-template-columns:1.2fr 1fr 1fr}.urumi-footer-about{grid-column:1/-1}.urumi-product-search input[type=search]{font-size:11px}}
+@media(max-width:750px){.urumi-footer-cta{grid-template-columns:1fr}.urumi-footer-cta-copy{padding:38px 28px}.urumi-footer-visual{min-height:230px;background-position:center 51%}.urumi-footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}.urumi-footer-brand,.urumi-footer-about{grid-column:1/-1}}
+@media(max-width:700px){.urumi-retail-announcement,body.home .urumi-retail-announcement{min-height:28px;gap:7px;font-size:9px}.urumi-header-inner,body.home .urumi-header-inner{grid-template-columns:1fr auto;grid-template-rows:auto auto;min-height:105px;padding:11px 16px;gap:8px 12px}.urumi-product-search,body.home .urumi-header-inner .urumi-product-search{grid-column:1/-1;grid-row:2;min-height:40px;height:40px}.urumi-product-search button{min-width:65px}.urumi-product-search input[type=search]{font-size:11px}.urumi-search-glyph{margin-left:12px;font-size:21px}.urumi-cart-link{min-height:37px;padding:4px 7px}.urumi-cart-link svg{width:15px;height:15px}.urumi-category-nav a{min-height:39px}.urumi-site-footer{padding:12px 15px 0}.urumi-footer-cta h2{font-size:clamp(39px,10vw,54px)}.urumi-footer-cta p{font-size:13px}.urumi-footer-cta-actions{margin-top:22px;gap:17px}.urumi-footer-inner{padding:40px 4px}}
+@media(max-width:410px){.urumi-retail-announcement span{display:none}.urumi-retail-announcement a{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.urumi-footer-visual-tag{backdrop-filter:none}}
+@media(max-width:700px){body.home .urumi-header-inner{min-height:70px;grid-template-rows:auto}body.home .urumi-header-inner .urumi-product-search{display:none}}
